@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Python
 __pycache__/
 *.pyc
@@ -15,7 +15,7 @@ frontend/.env
 
 # OS
 .DS_Store
-=======
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -234,4 +234,4 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
->>>>>>> 03587a2178a5533a54c6cab6f4f22f2b7e766994
+
