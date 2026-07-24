@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+/* ---- Theme tokens ---- */
+/* Dark theme: near-black with a cyan/teal glow, matching the reference design. */
+.dark {
+  --color-ink: 6 10 14;
+  --color-panel: 12 22 24;
+  --color-panel-border: 22 42 46;
+  --color-signal: 34 211 238;       /* cyan-400 */
+  --color-positive: 45 212 191;     /* teal-400 */
+  --color-negative: 244 63 94;      /* rose-500 */
+  --color-neutral: 100 116 139;     /* slate-500 */
+  --color-text-primary: 236 253 250;
+  --color-text-secondary: 148 163 184;
+}
+
+/* Light theme: clean white/slate with the same cyan/teal accent for continuity. */
+.light {
+  --color-ink: 248 250 252;
+  --color-panel: 255 255 255;
+  --color-panel-border: 226 232 240;
+  --color-signal: 8 145 178;        /* cyan-700, darker for contrast on white */
+  --color-positive: 13 148 136;     /* teal-600 */
+  --color-negative: 225 29 72;      /* rose-600 */
+  --color-neutral: 100 116 139;
+  --color-text-primary: 15 23 42;
+  --color-text-secondary: 71 85 105;
+}
+
+body {
+  background-color: rgb(var(--color-ink));
+  color: rgb(var(--color-text-primary));
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background-color: rgb(var(--color-signal));
+  color: rgb(var(--color-ink));
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgb(var(--color-text-primary) / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--color-text-primary) / 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.glass-card {
+  background-color: rgb(var(--color-panel) / 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgb(var(--color-panel-border));
+  border-radius: 1rem;
+  box-shadow: 0 8px 40px -12px rgb(0 0 0 / 0.4);
+}
+
+
+/* === Cosmic Background Animation === */
+body::before{
+content:"";
+position:fixed;inset:0;pointer-events:none;
+background:
+radial-gradient(circle at 20% 20%,rgba(255,255,255,.15) 1px,transparent 2px),
+radial-gradient(circle at 80% 30%,rgba(0,255,255,.15) 1px,transparent 2px),
+radial-gradient(circle at 40% 80%,rgba(255,0,255,.12) 1px,transparent 2px);
+background-size:180px 180px;
+animation:starsMove 25s linear infinite;
+z-index:-2;
+}
+body::after{
+content:"";
+position:fixed;inset:-20%;
+pointer-events:none;
+background:
+repeating-linear-gradient(180deg,rgba(255,255,255,.08) 0 2px,transparent 2px 120px);
+filter:blur(1px);
+animation:fall 8s linear infinite;
+z-index:-1;
+opacity:.7;
+}
+@keyframes fall{from{transform:translateY(-20%)}to{transform:translateY(20%)}}
+@keyframes starsMove{from{transform:rotate(0deg) scale(1)}to{transform:rotate(360deg) scale(1.1)}}
+.blackhole{
+position:fixed;left:50%;top:50%;width:220px;height:220px;transform:translate(-50%,-50%);
+border-radius:50%;
+background:radial-gradient(circle,#000 20%,rgba(90,0,255,.5) 55%,transparent 70%);
+filter:blur(2px);
+opacity:.18;
+animation:spin 14s linear infinite;
+pointer-events:none;z-index:-1;
+}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
